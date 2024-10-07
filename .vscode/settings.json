@@ -1,0 +1,81 @@
+{
+    "terrys-save-states.saveStates": [
+        {
+            "name": "c:\\Projetos\\projeto_vinculaAcao\\app\\pages\\Home.tsx",
+            "saveStates": [
+                {
+                    "id": "Jh6wMBr2TKG7EhQI2uNqjIyJet68D-oA",
+                    "content": "import React from 'react';\r\nimport { View, Text, TouchableOpacity, StyleSheet } from 'react-native';\r\nimport { useNavigation } from '@react-navigation/native';\r\n\r\nexport default function HomeScreen() {\r\n  const navigation = useNavigation();\r\n\r\n  const navigateToLogin = () => {\r\n    navigation.navigate('Login'); \r\n  };\r\n\r\n  return (\r\n    <View style={styles.container}>\r\n      \r\n\r\n     \r\n    </View>\r\n  );\r\n}\r\n\r\nconst styles = StyleSheet.create({\r\n  container: {\r\n    flex: 1,\r\n    justifyContent: 'center',\r\n    alignItems: 'center',\r\n    backgroundColor: '#f5f5f5',\r\n    padding: 20,\r\n  },\r\n  title: {\r\n    fontSize: 28,\r\n    fontWeight: 'bold',\r\n    color: '#333',\r\n    marginBottom: 10,\r\n    textAlign: 'center',\r\n  },\r\n  subtitle: {\r\n    fontSize: 16,\r\n    color: '#666',\r\n    textAlign: 'center',\r\n    marginBottom: 30,\r\n  },\r\n  button: {\r\n    backgroundColor: '#ff6f61',\r\n    paddingVertical: 15,\r\n    paddingHorizontal: 30,\r\n    borderRadius: 30,\r\n  },\r\n  buttonText: {\r\n    color: '#fff',\r\n    fontSize: 18,\r\n    fontWeight: '600',\r\n  },\r\n});\r\n",
+                    "timestamp": 1728284047874,
+                    "description": ""
+                }
+            ]
+        },
+        {
+            "name": "c:\\Projetos\\projeto_vinculaAcao\\app\\index.tsx",
+            "saveStates": [
+                {
+                    "id": "CdjLWjJCvVM6VEI5lA0bh3JnTqo89tdP",
+                    "content": "// App.tsx\nimport React from 'react';\nimport { NavigationContainer } from '@react-navigation/native';\nimport { createBottomTabNavigator } from '@react-navigation/bottom-tabs';\nimport Icon from 'react-native-vector-icons/Ionicons';\nimport Home from './pages/HomePage/Home';\nimport LoginPage from './pages/LoginPage/Login';\n\nconst Tab = createBottomTabNavigator();\n\nexport default function App() {\n  return (\n    <Tab.Navigator>\n      <Tab.Screen\n        name=\"VinculaAção\"\n        component={Home}\n        options={{\n          tabBarIcon: ({ color, size }) => (\n            <Icon name=\"home-outline\" size={size} color={color} />\n          ),\n          tabBarLabel: () => null,\n        }}\n      />\n      <Tab.Screen\n        name=\"Login\"\n        component={LoginPage}\n        options={{\n          tabBarIcon: ({ color, size }) => (\n            <Icon name=\"person-outline\" size={size} color={color} />\n          ),\n          tabBarLabel: () => null,\n        }}\n      />\n    </Tab.Navigator>\n  );\n}\n",
+                    "timestamp": 1728308210433,
+                    "description": ""
+                }
+            ]
+        },
+        {
+            "name": "c:\\Projetos\\projeto_vinculaAcao\\app\\pages\\LoginPage\\Login.tsx",
+            "saveStates": [
+                {
+                    "id": "kQvoBGBHaWzzZfYdYmO21wMtt0JCq4UN",
+                    "content": "import React, { useState } from \"react\";\r\nimport { styles } from \"./styles\";\r\nimport Logo from '../../assets/images/VinculaAçãoLogo.svg';\r\nimport { Input } from \"../../components/Input/index\";\r\nimport { Button } from \"../../components/Button/index\";\r\nimport { Text, View, Image, Alert } from 'react-native'\r\nimport { useNavigation, NavigationProp } from '@react-navigation/native';\r\nimport { MaterialIcons, Octicons } from '@expo/vector-icons';\r\n\r\nexport default function Login() {\r\n  const navigation = useNavigation<NavigationProp<any>>();\r\n\r\n  const [email, setEmail] = useState('');\r\n  const [password, setPassword] = useState('');\r\n  const [showPassword, setShowPassword] = useState(true);\r\n  const [loading, setLoading] = useState(false);\r\n\r\n\r\n  async function getLogin() {\r\n    try {\r\n      setLoading(true)\r\n\r\n      if (!email || !password) {\r\n        return Alert.alert('Anteção 2', 'Informe os campos obrigatórios!')\r\n      }\r\n      navigation.reset({ routes: [{ name: 'BottomRoutes' }] });\r\n    } catch (error) {\r\n      console.log(error)\r\n    } finally {\r\n      setLoading(false)\r\n    }\r\n  }\r\n\r\n\r\n  return (\r\n    <View style={styles.container}>\r\n      <View style={styles.boxTop}>\r\n        <Image\r\n          source={Logo}\r\n          style={styles.logo}\r\n          resizeMode=\"contain\"\r\n        />\r\n        <Text style={styles.text}>Bem vindo de volta!</Text>\r\n      </View>\r\n      <View style={styles.boxMid}>\r\n        <Input\r\n          title=\"ENDEREÇO E-MAIL\"\r\n          value={email}\r\n          onChangeText={setEmail}\r\n          placeholder=\"fulano@gmail.com\"\r\n          placeholderTextColor=\"rgba(128, 128, 128, 0.5)\"\r\n          IconRight={MaterialIcons}\r\n          iconRightName=\"email\"\r\n          onIconRightPress={() => console.log('OLA')}\r\n        />\r\n        <Input\r\n          title=\"SENHA\"\r\n          value={password}\r\n          onChangeText={setPassword}\r\n          placeholder=\"elivelton123\"\r\n          placeholderTextColor=\"rgba(128, 128, 128, 0.5)\"\r\n          IconRight={Octicons}\r\n          iconRightName={showPassword ? \"eye-closed\" : \"eye\"}\r\n          onIconRightPress={() => setShowPassword(!showPassword)}\r\n          secureTextEntry={showPassword}\r\n        />\r\n        <Text style={styles.textBottom}>Não tem conta? <Text style={styles.textBottomCreate}>Crie agora</Text></Text>\r\n\r\n      </View>\r\n      <View style={styles.boxBottom}>\r\n        <Button text=\"ENTRAR\" loading={loading} onPress={() => getLogin()} />\r\n\r\n      </View>\r\n    </View>\r\n  )\r\n}",
+                    "timestamp": 1728308214833,
+                    "description": ""
+                }
+            ]
+        },
+        {
+            "name": "c:\\Projetos\\projeto_vinculaAcao\\app\\components\\Input\\index.tsx",
+            "saveStates": [
+                {
+                    "id": "OvMScQ48KoSOWoYF57K240TsF#kLPt_B",
+                    "content": "import React, { forwardRef, LegacyRef } from \"react\";\r\nimport { TextInput, View, TextInputProps, Text, TouchableOpacity, StyleProp, TextStyle } from 'react-native';\r\nimport { MaterialIcons, FontAwesome, Octicons } from '@expo/vector-icons';\r\nimport { themas } from \"@/global/themes\";\r\nimport { style } from \"./styles\";\r\n\r\ntype IconComponent = React.ComponentType<React.ComponentProps<typeof MaterialIcons>> |\r\n    React.ComponentType<React.ComponentProps<typeof FontAwesome>> |\r\n    React.ComponentType<React.ComponentProps<typeof Octicons>>;\r\n\r\ntype Props = TextInputProps & {\r\n    IconLeft?: IconComponent,\r\n    IconRight?: IconComponent,\r\n    iconLeftName?: string,\r\n    iconRightName?: string,\r\n    title?: string,\r\n    onIconLeftPress?: () => void,\r\n    onIconRightPress?: () => void,\r\n    height?: number,\r\n    labelStyle?: StyleProp<TextStyle>\r\n}\r\n\r\nexport const Input = forwardRef((props: Props, ref: LegacyRef<TextInput> | null) => {\r\n    const { IconLeft, IconRight, iconLeftName, iconRightName, title, onIconLeftPress, onIconRightPress, height, labelStyle, ...rest } = props;\r\n\r\n    const calculateSizeWidth = () => {\r\n        if (IconLeft && IconRight) {\r\n            return '80%';\r\n        } else if (IconLeft || IconRight) {\r\n            return '90%';\r\n        } else {\r\n            return '100%';\r\n        }\r\n    };\r\n\r\n    const calculateSizePaddingLeft = () => {\r\n        if (IconLeft && IconRight) {\r\n            return 0;\r\n        } else if (IconLeft || IconRight) {\r\n            return 10;\r\n        } else {\r\n            return 20;\r\n        }\r\n    };\r\n\r\n    return (\r\n        <>\r\n            {title && <Text style={[style.titleInput, labelStyle]}>{title}</Text>}\r\n            <View style={[style.boxInput, { paddingLeft: calculateSizePaddingLeft(), height: height ? height : 40, padding: 5 }]}>\r\n                {IconLeft && iconLeftName && (\r\n                    <TouchableOpacity onPress={onIconLeftPress} style={style.Button}>\r\n                        <IconLeft name={iconLeftName as any} size={20} color={themas.Colors.gray} style={style.Icon} />\r\n                    </TouchableOpacity>\r\n                )}\r\n                <TextInput\r\n\r\n                    style={[style.input, { width: calculateSizeWidth(), height: '100%', outline: 'none' }]}\r\n                    ref={ref}\r\n                    multiline\r\n                    {...rest}\r\n\r\n                />\r\n\r\n                {IconRight && iconRightName && (\r\n                    <TouchableOpacity onPress={onIconRightPress} style={style.Button}>\r\n                        <IconRight name={iconRightName as any} size={20} color={themas.Colors.gray} style={style.Icon} />\r\n                    </TouchableOpacity>\r\n                )}\r\n            </View>\r\n        </>\r\n    );\r\n});",
+                    "timestamp": 1728308221157,
+                    "description": ""
+                }
+            ]
+        },
+        {
+            "name": "c:\\Projetos\\projeto_vinculaAcao\\app\\pages\\LoginPage\\styles.ts",
+            "saveStates": [
+                {
+                    "id": "TT5KaqtoQHBVHNi1q85ChHyLH3VmAi2d",
+                    "content": "import { StyleSheet, Dimensions } from \"react-native\";\r\nimport { themas } from \"@/global/themes\";\r\n\r\nexport const styles = StyleSheet.create({\r\n  container: {\r\n    flex: 1,\r\n    alignItems: \"center\",\r\n    justifyContent: \"center\",\r\n  },\r\n  boxTop: {\r\n    height: Dimensions.get(\"window\").height / 3,\r\n    width: \"100%\",\r\n    // backgroundColor:'red',\r\n    alignItems: \"center\",\r\n    justifyContent: \"center\",\r\n  },\r\n  boxMid: {\r\n    height: Dimensions.get(\"window\").height / 3.5,\r\n    // backgroundColor:'blue',\r\n    width: \"100%\",\r\n    paddingHorizontal: 37,\r\n  },\r\n  boxBottom: {\r\n    height: Dimensions.get(\"window\").height / 5,\r\n    // backgroundColor:'green',\r\n    width: \"100%\",\r\n    alignItems: \"center\",\r\n    justifyContent: \"flex-start\",\r\n  },\r\n  boxInput: {\r\n    width: \"100%\",\r\n    height: 40,\r\n    borderWidth: 1,\r\n    borderRadius: 40,\r\n    borderColor: themas.Colors.lightGray,\r\n    backgroundColor: themas.Colors.bgScreen,\r\n    marginTop: 10,\r\n    flexDirection: \"row\",\r\n    alignItems: \"center\",\r\n    paddingHorizontal: 30,\r\n  },\r\n  logo: {\r\n    width: 140,\r\n    height: 140,\r\n    marginTop: 40,\r\n  },\r\n  text: {\r\n    marginTop: 35,\r\n    fontSize: 22,\r\n    fontWeight: \"bold\",\r\n  },\r\n  input: {\r\n    // backgroundColor:'red',\r\n    height: \"100%\",\r\n    width: \"100%\",\r\n    borderRadius: 40,\r\n    paddingHorizontal:20\r\n  },\r\n  boxIcon: {\r\n    width: 50,\r\n    height: 50,\r\n    backgroundColor: \"red\",\r\n    alignItems: \"center\",\r\n    justifyContent: \"center\",\r\n  },\r\n  titleInput: {\r\n    marginLeft: 5,\r\n    color: themas.Colors.gray,\r\n    marginTop: 20,\r\n  },\r\n  textBottom: {\r\n    fontSize: 16,\r\n    color: themas.Colors.gray,\r\n    marginTop: 10,\r\n   \r\n  },\r\n  textBottomCreate: {\r\n    fontSize: 16,\r\n    color: themas.Colors.primary,\r\n  },\r\n});\r\n",
+                    "timestamp": 1728308229804,
+                    "description": ""
+                }
+            ]
+        },
+        {
+            "name": "c:\\Projetos\\projeto_vinculaAcao\\app\\components\\Input\\styles.ts",
+            "saveStates": [
+                {
+                    "id": "xpo6ZC7kcxBrJiZyw3bpEn16sQh#5KYw",
+                    "content": "import { StyleSheet, Dimensions } from \"react-native\";\r\nimport { themas } from \"@/global/themes\";\r\nimport SpaceMono from \"@/assets/fonts/SpaceMono-Regular.ttf\";\r\nexport const style = StyleSheet.create({\r\n  boxInput: {\r\n    width: \"100%\",\r\n    height: 50,\r\n    borderWidth: 1,\r\n    borderRadius: 25,\r\n    borderColor: themas.Colors.lightGray,\r\n    backgroundColor: themas.Colors.bgScreen,\r\n    marginTop: 10,\r\n    flexDirection: \"row\",\r\n    alignItems: \"center\",\r\n    justifyContent: \"space-between\",\r\n    paddingHorizontal: 15,\r\n    shadowColor: \"#000\",\r\n    shadowOffset: { width: 0, height: 2 },\r\n    shadowOpacity: 0.1,\r\n    shadowRadius: 4,\r\n    elevation: 2,\r\n  },\r\n  input: {\r\n    height: \"100%\",\r\n    width: \"80%\",\r\n    fontSize: 17,\r\n    color: themas.Colors.semiBlack,\r\n    paddingHorizontal: 10,\r\n    paddingTop: 4,\r\n    alignItems: \"center\",\r\n    // justifyContent: \"center\",\r\n    textAlign: \"justify\",\r\n\r\n    fontFamily: \"SpaceMono\",\r\n  },\r\n  titleInput: {\r\n    marginLeft: 5,\r\n    color: themas.Colors.gray,\r\n    marginTop: 20,\r\n  },\r\n  Button: {\r\n    width: \"10%\",\r\n    alignItems: \"center\",\r\n    justifyContent: \"center\",\r\n  },\r\n  Icon: {\r\n    width: \"10%\",\r\n    justifyContent: \"center\",\r\n    alignItems: \"center\",\r\n    paddingRight: 15,\r\n  },\r\n});\r\n",
+                    "timestamp": 1728308232338,
+                    "description": ""
+                }
+            ]
+        },
+        {
+            "name": "c:\\Projetos\\projeto_vinculaAcao\\declarations.d.ts",
+            "saveStates": [
+                {
+                    "id": "dNjkmeRMmt608E03Z3A9QZ#UIcPcxmlA",
+                    "content": "declare module '*.png';\r\ndeclare module '*.jpg';\r\ndeclare module '*.jpeg';\r\ndeclare module '*.gif';\r\ndeclare module '*.svg';\r\ndeclare module '*.ttf';\r\n",
+                    "timestamp": 1728308246758,
+                    "description": ""
+                }
+            ]
+        }
+    ]
+}
