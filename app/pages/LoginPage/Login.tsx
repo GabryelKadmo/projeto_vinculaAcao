@@ -57,14 +57,23 @@ export default function Login() {
           title="SENHA"
           value={password}
           onChangeText={setPassword}
-          placeholder="elivelton123"
+          placeholder="elivelton@123"
           placeholderTextColor="rgba(128, 128, 128, 0.5)"
           IconRight={Octicons}
           iconRightName={showPassword ? "eye-closed" : "eye"}
           onIconRightPress={() => setShowPassword(!showPassword)}
           secureTextEntry={showPassword}
         />
-        <Text style={styles.textBottom}>Não tem conta? <Text style={styles.textBottomCreate}>Crie agora</Text></Text>
+        <View>
+          <Text style={styles.textBottom}>
+            Não tem conta?
+            <Text style={styles.textBottomCreate} onPress={() => navigation.navigate('Register')}>
+              Crie agora
+            </Text>
+          </Text>
+        </View>
+
+
 
       </View>
       <View style={styles.boxBottom}>

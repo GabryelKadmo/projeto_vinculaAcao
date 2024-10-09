@@ -1,6 +1,5 @@
 import { StyleSheet, Dimensions } from "react-native";
 import { themas } from "@/global/themes";
-import SpaceMono from "@/assets/fonts/SpaceMono-Regular.ttf";
 export const style = StyleSheet.create({
   boxInput: {
     width: "100%",
@@ -30,8 +29,6 @@ export const style = StyleSheet.create({
     alignItems: "center",
     // justifyContent: "center",
     textAlign: "justify",
-
-    fontFamily: "SpaceMono",
   },
   titleInput: {
     marginLeft: 5,

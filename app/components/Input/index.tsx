@@ -1,4 +1,4 @@
-import React, { forwardRef, LegacyRef } from "react";
+import React, { useState, forwardRef, LegacyRef } from "react";
 import { TextInput, View, TextInputProps, Text, TouchableOpacity, StyleProp, TextStyle } from 'react-native';
 import { MaterialIcons, FontAwesome, Octicons } from '@expo/vector-icons';
 import { themas } from "@/global/themes";
@@ -17,11 +17,28 @@ type Props = TextInputProps & {
     onIconLeftPress?: () => void,
     onIconRightPress?: () => void,
     height?: number,
-    labelStyle?: StyleProp<TextStyle>
+    labelStyle?: StyleProp<TextStyle>,
+    isEmail?: boolean // Adicione essa propriedade para identificar campos de email
 }
 
 export const Input = forwardRef((props: Props, ref: LegacyRef<TextInput> | null) => {
-    const { IconLeft, IconRight, iconLeftName, iconRightName, title, onIconLeftPress, onIconRightPress, height, labelStyle, ...rest } = props;
+    const { IconLeft, IconRight, iconLeftName, iconRightName, title, onIconLeftPress, onIconRightPress, height, labelStyle, isEmail, ...rest } = props;
+
+    const [emailError, setEmailError] = useState<string | null>(null);
+
+    const handleChangeText = (text: string) => {
+        if (isEmail) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(text)) {
+                setEmailError('Email inválido');
+            } else {
+                setEmailError(null);
+            }
+        }
+        if (rest.onChangeText) {
+            rest.onChangeText(text);
+        }
+    };
 
     const calculateSizeWidth = () => {
         if (IconLeft && IconRight) {
@@ -53,20 +70,18 @@ export const Input = forwardRef((props: Props, ref: LegacyRef<TextInput> | null)
                     </TouchableOpacity>
                 )}
                 <TextInput
-
                     style={[style.input, { width: calculateSizeWidth(), height: '100%', outline: 'none' }]}
                     ref={ref}
-                    multiline
+                    onChangeText={handleChangeText}
                     {...rest}
-
                 />
-
                 {IconRight && iconRightName && (
                     <TouchableOpacity onPress={onIconRightPress} style={style.Button}>
                         <IconRight name={iconRightName as any} size={20} color={themas.Colors.gray} style={style.Icon} />
                     </TouchableOpacity>
                 )}
             </View>
+            {emailError && <Text style={{ color: 'red', marginTop: 5 }}>{emailError}</Text>}
         </>
     );
 });
